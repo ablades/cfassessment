@@ -13,8 +13,12 @@ let linkData = [
 ]
 
 async function handleRequest(request) {
-
-  return new Response(JSON.stringify(linkData), {
-    headers: { 'content-type': 'application/json' },
-  })
+  const url = new URL(request.url)
+  if (url.pathname == '/links') {
+    return new Response(JSON.stringify(linkData), {
+      headers: { 'content-type': 'application/json' },
+    })
+  } else {
+      return new Response('400 Bad Request', { status: 400 })
+    }
 }
